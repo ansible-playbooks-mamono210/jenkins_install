@@ -1,0 +1,10 @@
+- hosts: all
+
+  vars_files:
+    - vars/default.yml
+
+  roles:
+    - role: system_locale
+      tags: system_locale
+    - role: jenkins
+      tags: jenkins
