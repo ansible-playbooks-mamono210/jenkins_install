@@ -1,6 +1,3 @@
-#System locale
-system_locale: ja_JP.utf8
-
 # Java version to install
 # Default settings install OpenJDK
 java_version: java

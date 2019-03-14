@@ -1,11 +1,9 @@
 - name: Install Java with yum | default settings install OpenJDK
-  become: yes
   yum:
     name: '{{ java_version }}'
     state: present
 
 - name: Add the Jenkins repository to the yum repos
-  become: yes
   yum_repository:
     name: jenkins
     description: Jenkins-stable
@@ -14,13 +12,11 @@
     gpgkey: http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
 
 - name: Install Jenkins with yum
-  become: yes
   yum:
     name: jenkins
     state: present
 
 - name: Start Jenkins
-  become: yes
   service:
     name: jenkins
     state: started
