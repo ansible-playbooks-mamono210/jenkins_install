@@ -16,6 +16,11 @@
     name: jenkins
     state: present
 
+- name: Add jenkins to docker group
+  user:
+    name: jenkins
+    group: docker
+
 - name: Start Jenkins
   service:
     name: jenkins

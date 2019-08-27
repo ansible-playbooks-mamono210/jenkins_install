@@ -1,0 +1,6 @@
+---
+- geerlingguy.repo-epel
+- geerlingguy.pip
+- geerlingguy.docker
+- robertdebock.bootstrap
+- robertdebock.locale
