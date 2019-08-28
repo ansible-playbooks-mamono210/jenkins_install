@@ -2,5 +2,6 @@
 - geerlingguy.repo-epel
 - geerlingguy.pip
 - geerlingguy.docker
+- geerlingguy.git
 - robertdebock.bootstrap
 - robertdebock.locale
