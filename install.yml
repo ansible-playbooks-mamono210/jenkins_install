@@ -1,17 +1,5 @@
 - hosts: all
-  become: True
-
-  vars:
-    # System locale setting
-    locale_lang: "ja_JP.UTF-8"
-    pip_install_packages:
-      - name: pip
-        state: latest
-      - name: ansible
-      - name: awscli
-
-  vars_files:
-    - vars/default.yml
+  become: true
 
   roles:
     - role: geerlingguy.repo-epel
@@ -20,4 +8,4 @@
     - role: geerlingguy.docker
     - role: robertdebock.bootstrap
     - role: robertdebock.locale
-    - role: jenkins
+    - role: geerlingguy.jenkins
