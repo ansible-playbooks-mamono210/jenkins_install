@@ -1,0 +1,41 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: ec2
+platforms:
+  - name: jenkins_install
+    image: ${AMI_ID}
+    instance_type: t2.micro
+    vpc_subnet_id: subnet-022a704b3061b8b39
+provisioner:
+  name: ansible
+  connection_options:
+    jenkins_plugins:
+      - greenballs
+      - ghprb
+      - workflow-aggregator
+      - aws-codebuild
+      - pipeline-aws
+      - aws-cloudwatch-logs-publisher
+      - aws-lambda
+      - snsnotify
+      - blueocean
+      - docker-workflow
+      - slack
+      - global-slack-notifier
+  log: true
+  playbooks:
+    converge: ../../install.yml
+verifier:
+  name: ansible
+scenario:
+  test_sequence:
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - converge
+    - cleanup
+    - destroy

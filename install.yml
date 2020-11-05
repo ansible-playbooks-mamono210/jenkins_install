@@ -1,11 +1,13 @@
+---
 - hosts: all
   become: true
 
   roles:
-    - role: geerlingguy.repo-epel
+    - role: robertdebock.epel
     - role: geerlingguy.git
     - role: geerlingguy.pip
     - role: geerlingguy.docker
+    - role: geerlingguy.java
+    - role: geerlingguy.jenkins
     - role: robertdebock.bootstrap
     - role: robertdebock.locale
-    - role: geerlingguy.jenkins

@@ -1,8 +1,9 @@
 ---
-- geerlingguy.repo-epel
 - geerlingguy.pip
 - geerlingguy.docker
 - geerlingguy.git
-- robertdebock.bootstrap
-- robertdebock.locale
+- geerlingguy.java
 - geerlingguy.jenkins
+- robertdebock.bootstrap
+- robertdebock.epel
+- robertdebock.locale
