@@ -8,10 +8,10 @@ Change to root and execute commands below.
 
 ```
 ansible-galaxy install -r roles/requirements.yml
-ansible-playbook -i localhost, -c local install.yml -e '@vars/default.yml'
+ansible-playbook -i localhost, -c local install.yml
 ```
 
-# Ansible Vars
+# Ansible Variables
 
 ### Boostrap
 [robertdebock/ansible-role-bootstrap: Prepare your system to be managed by Ansible. - GitHub](https://github.com/robertdebock/ansible-role-bootstrap)

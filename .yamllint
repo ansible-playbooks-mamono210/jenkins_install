@@ -26,8 +26,8 @@ rules:
     level: error
     ignore: |
        .github/workflows/build.yml
-       molecule/default/create.yml
-       molecule/default/destroy.yml
+       molecule/vm/create.yml
+       molecule/vm/destroy.yml
        var_file_example/test_vars.yml
   new-line-at-end-of-file: enable
   new-lines: enable

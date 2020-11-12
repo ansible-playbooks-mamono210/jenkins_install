@@ -15,7 +15,42 @@ jobs:
           targets: |
             install.yml
 
-  molecule:
+  molecule-docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - centos7
+          - centos7jp
+        python-version:
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: pip install -r molecule/requirements/docker
+
+      - name: Create galaxy dependencies file in 'molecule/docker/'
+        run: cp roles/requirements.yml molecule/docker/requirements.yml
+
+      - name: Test with molecule
+        run: |
+          molecule test --scenario-name docker
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+
+  molecule-vm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,11 +62,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r molecule/requirements.txt
+          pip install -r molecule/requirements/vm
 
-      - name: Create galaxy dependencies file in 'molecule/default/'
+      - name: Create galaxy dependencies file in 'molecule/vm/'
         run: |
-          cp roles/requirements.yml molecule/default/requirements.yml
+          cp roles/requirements.yml molecule/vm/requirements.yml
 
       - name: Set latest AMI image id to environment variables
         run: |
@@ -48,7 +83,7 @@ jobs:
 
       - name: Test with molecule
         run: |
-          molecule test
+          molecule test --scenario-name vm
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

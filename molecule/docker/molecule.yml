@@ -1,0 +1,38 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: ghcr.io/docker-hub-tm/ansible-test/${MOLECULE_DISTRO:-centos7}:latest
+    pre_build_image: True
+    command: /sbin/init
+    privileged: True
+provisioner:
+  name: ansible
+  connection_options:
+    jenkins_plugins:
+      - greenballs
+      - ghprb
+      - workflow-aggregator
+      - aws-codebuild
+      - pipeline-aws
+      - aws-cloudwatch-logs-publisher
+      - aws-lambda
+      - snsnotify
+      - blueocean
+      - docker-workflow
+      - slack
+      - global-slack-notifier
+  log: true
+  playbooks:
+    converge: ../../install.yml
+verifier:
+  name: ansible
+scenario:
+  test_sequence:
+    - dependency
+    - syntax
+    - create
+    - converge
