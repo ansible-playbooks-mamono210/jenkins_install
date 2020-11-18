@@ -20,11 +20,8 @@ jobs:
     strategy:
       matrix:
         distro:
-          - centos7
           - centos7jp
         python-version:
-          - 3.6
-          - 3.7
           - 3.8
           - 3.9
 
