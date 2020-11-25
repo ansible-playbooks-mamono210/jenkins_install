@@ -36,7 +36,7 @@
 
     - name: Delete remote keypair
       ec2_key:
-        name: redmine_install_molecule_key
+        name: jenkins_install_molecule_key
         state: absent
 
     # Mandatory configuration for Molecule to function.
