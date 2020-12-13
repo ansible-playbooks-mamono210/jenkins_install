@@ -43,9 +43,12 @@ jobs:
         run: |
           molecule test --scenario-name docker
         env:
-          PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.distro }}
+          PROFILE_TASKS_SORT_ORDER: 'none'
+          PROFILE_TASKS_TASK_OUTPUT_LIMIT: '200'
+          PY_COLORS: '1'
+          TZ: 'Asia/Tokyo'
 
   molecule-vm:
     runs-on: ubuntu-latest
@@ -75,8 +78,8 @@ jobs:
           echo "AMI_ID=${AMI_ID}" >> $GITHUB_ENV
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Set environment variables with timestamp for making sure Molecule would create unique AWS resources
         run: |
@@ -90,12 +93,17 @@ jobs:
         run: |
           molecule test --scenario-name vm
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          VPC_SUBNET_ID: ${{ secrets.VPC_SUBNET_ID }}
-          PY_COLORS: '1'
+          # AMI_ID: sotred in system environment variables
           ANSIBLE_FORCE_COLOR: '1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          PROFILE_TASKS_SORT_ORDER: 'none'
+          PROFILE_TASKS_TASK_OUTPUT_LIMIT: '200'
+          PY_COLORS: '1'
+          # TIMESTAMP: sotred in system environment variables
+          TZ: 'Asia/Tokyo'
+          VPC_SUBNET_ID: ${{ secrets.VPC_SUBNET_ID }}
 
   trailing-whitespace:
     name: Find Trailing Whitespace
