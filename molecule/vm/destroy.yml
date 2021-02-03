@@ -8,7 +8,7 @@
     - block:
         - name: Populate instance config
           ansible.builtin.set_fact:
-            instance_conf: "{{ lookup('file', molecule_instance_config) | molecule_from_yaml }}"
+            instance_conf: "{{ lookup('file', molecule_instance_config) | community.molecule.from_yaml }}"
             skip_instances: false
       rescue:
         - name: Populate instance config when file missing
@@ -33,6 +33,7 @@
       until: ec2_jobs.finished
       retries: 300
       with_items: "{{ server.results }}"
+
 
     - name: Delete remote keypair
       amazon.aws.ec2_key:
@@ -64,6 +65,6 @@
 
     - name: Dump instance config
       ansible.builtin.copy:
-        content: "{{ instance_conf | to_json | from_json | molecule_to_yaml | molecule_header }}"
+        content: "{{ instance_conf | to_json | from_json | community.molecule.to_yaml }}"
         dest: "{{ molecule_instance_config }}"
       when: server.changed | bool
