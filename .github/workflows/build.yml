@@ -50,6 +50,14 @@ jobs:
           PY_COLORS: '1'
           TZ: 'Asia/Tokyo'
 
+      - name: Show Ansible version
+        run: |
+          pip list | grep ansible
+          ansible --version
+
+      - name: Show Molecule version
+        run: molecule --version
+
   molecule-vm:
     runs-on: ubuntu-latest
     steps:
@@ -108,6 +116,14 @@ jobs:
           # TIMESTAMP: sotred in system environment variables
           TZ: 'Asia/Tokyo'
           VPC_SUBNET_ID: ${{ secrets.VPC_SUBNET_ID }}
+
+      - name: Show Ansible version
+        run: |
+          pip list | grep ansible
+          ansible --version
+
+      - name: Show Molecule version
+        run: molecule --version
 
   trailing-whitespace:
     name: Find Trailing Whitespace
