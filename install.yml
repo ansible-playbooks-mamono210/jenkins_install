@@ -9,5 +9,4 @@
     - role: geerlingguy.docker
     - role: geerlingguy.java
     - role: geerlingguy.jenkins
-    - role: robertdebock.bootstrap
     - role: robertdebock.locale
