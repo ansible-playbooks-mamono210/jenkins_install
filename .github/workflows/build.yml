@@ -139,8 +139,8 @@ jobs:
       - name: Set environment variables with timestamp for making sure Molecule would create unique AWS resources
         run: |
           TIMESTAMP=$(date --date "9 hours" "+%Y%m%d_%H%M%S")
-          echo "AWSIAM_USER=molecule_awsiam_user_${TIMESTAMP}_${{ matrix.distro }}" >> $GITHUB_ENV
-          echo "AWSIAM_POLICY_NAME=molecule_awsiam_policy_name_${TIMESTAMP}_${{ matrix.distro }}" >> $GITHUB_ENV
+          echo "AWSIAM_USER=molecule_jenkins_install_${TIMESTAMP}_${{ matrix.distro }}" >> $GITHUB_ENV
+          echo "AWSIAM_POLICY_NAME=molecule_jenkins_install_name_${TIMESTAMP}_${{ matrix.distro }}" >> $GITHUB_ENV
 
       - name: Create AWS Access Key
         run: |
