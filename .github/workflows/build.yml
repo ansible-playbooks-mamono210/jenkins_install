@@ -54,6 +54,7 @@ jobs:
   molecule-docker:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         distro:
           - centos7jp
@@ -104,6 +105,7 @@ jobs:
   molecule-vm:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         include:
           - distro: centos7
