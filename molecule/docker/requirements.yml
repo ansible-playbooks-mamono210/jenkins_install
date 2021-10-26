@@ -1,0 +1,9 @@
+---
+- geerlingguy.pip
+- geerlingguy.docker
+- geerlingguy.git
+- geerlingguy.java
+- geerlingguy.jenkins
+- robertdebock.bootstrap
+- robertdebock.epel
+- robertdebock.locale
