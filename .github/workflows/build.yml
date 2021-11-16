@@ -52,21 +52,21 @@ jobs:
           | GREP_COLORS='mt=01;33' egrep --color=always 'detect-secrets.* '
 
   docker-centos7jp:
-    uses: mamono210-github-actions-workflows/molecule-docker/.github/workflows/workflows.yml@main
+    uses: github-actions-reusable-workflows/molecule-docker/.github/workflows/workflows.yml@main
     with:
       distro: centos7
       molecule-scenario: docker
       pip-requirements-file: molecule/requirements/docker
 
   docker-centos8:
-    uses: mamono210-github-actions-workflows/molecule-docker/.github/workflows/workflows.yml@main
+    uses: github-actions-reusable-workflows/molecule-docker/.github/workflows/workflows.yml@main
     with:
       distro: centos8
       molecule-scenario: docker
       pip-requirements-file: molecule/requirements/docker
 
   vm-centos7:
-    uses: mamono210-github-actions-workflows/molecule-ec2/.github/workflows/workflows.yml@main
+    uses: github-actions-reusable-workflows/molecule-ec2/.github/workflows/workflows.yml@main
     with:
       ami-name: centos7-1*
       molecule-scenario: vm
@@ -81,7 +81,7 @@ jobs:
       VPC_SUBNET_ID: ${{ secrets.VPC_SUBNET_ID }}
 
   vm-centos8:
-    uses: mamono210-github-actions-workflows/molecule-ec2/.github/workflows/workflows.yml@main
+    uses: github-actions-reusable-workflows/molecule-ec2/.github/workflows/workflows.yml@main
     with:
       ami-name: centos8-1*
       molecule-scenario: vm
