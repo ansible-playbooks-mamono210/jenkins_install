@@ -60,7 +60,8 @@ jobs:
     uses: github-actions-reusable-workflows/molecule-ec2/.github/workflows/workflows.yml@main
     with:
       ami-name: centos7-1*
-      molecule-scenario: vm_centos7
+      molecule-instance-type: t2.micro
+      molecule-scenario: vm
       pip-requirements-file: molecule/requirements/vm
       python-interpreter: /usr/bin/python
       tag-prefix: molecule_jenkins_install_centos7
@@ -75,7 +76,8 @@ jobs:
     uses: github-actions-reusable-workflows/molecule-ec2/.github/workflows/workflows.yml@main
     with:
       ami-name: centos-stream8-1*
-      molecule-scenario: vm_centos_stream8
+      molecule-instance-type: t4g.medium
+      molecule-scenario: vm
       pip-requirements-file: molecule/requirements/vm
       python-interpreter: /usr/libexec/platform-python
       tag-prefix: molecule_jenkins_install_centos-stream8
