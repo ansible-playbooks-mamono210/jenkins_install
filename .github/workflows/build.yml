@@ -76,7 +76,7 @@ jobs:
     uses: github-actions-reusable-workflows/molecule-ec2/.github/workflows/workflows.yml@main
     with:
       ami-name: centos-stream8-1*
-      molecule-instance-type: t4g.medium
+      molecule-instance-type: t2.medium
       molecule-scenario: vm
       pip-requirements-file: molecule/requirements/vm
       python-interpreter: /usr/libexec/platform-python
