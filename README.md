@@ -19,9 +19,6 @@ ansible-playbook -i localhost, -c local install.yml
 ### Docker
 [geerlingguy/ansible-role-docker - GitHub](https://github.com/geerlingguy/ansible-role-docker)
 
-### Epel
-[robertdebock/ansible-role-epel: Install epel on your system. - GitHub](https://github.com/robertdebock/ansible-role-epel)
-
 ### Git
 [geerlingguy/ansible-role-git - GitHub](https://github.com/geerlingguy/ansible-role-git)
 

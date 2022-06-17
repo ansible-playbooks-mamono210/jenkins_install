@@ -3,7 +3,7 @@
   become: true
 
   roles:
-    - role: robertdebock.epel
+    - role: mamono210.epel
     - role: geerlingguy.git
     - role: geerlingguy.pip
     - role: geerlingguy.docker
