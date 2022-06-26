@@ -23,6 +23,9 @@ executors:
       - image: ghcr.io/docker-hub-tm/circleci-executors/trailing-whitespace:latest
     resource_class: small
 
+orbs:
+  aws-cli: circleci/aws-cli@3.1.1
+
 jobs:
   ansible-lint:
     executor: ansible-lint
@@ -76,7 +79,6 @@ jobs:
       - run:
           name: Show Molecule version
           command: molecule --version
-
   molecule-ec2:
     executor: molecule-ec2
     parameters:
@@ -88,32 +90,11 @@ jobs:
         type: string
     steps:
       - checkout
-      - run:
-          name: Set environment variable with timestamp for making sure Molecule would create unique AWS resources
-          command: |
-            TIMESTAMP=$(date --date "9 hours" "+%Y%m%d_%H%M%S")
-            AWSIAM_USER="<< parameters.molecule-ec2-tag >>_${TIMESTAMP}"
-            AWSIAM_POLICY_NAME="<< parameters.molecule-ec2-tag >>_${TIMESTAMP}"
-            echo "export AWSIAM_USER=$AWSIAM_USER" >> $BASH_ENV
-            echo "export AWSIAM_POLICY_NAME=$AWSIAM_POLICY_NAME" >> $BASH_ENV
-            source $BASH_ENV
-      - run:
-          name: Create AWS Access Key
-          command: |
-            molecule dependency --scenario-name awsiam
-            molecule converge --scenario-name awsiam
-          environment:
-            ANSIBLE_FORCE_COLOR: '1'
-            # AWS_ACCESS_KEY_ID_1: sotred in CircleCI environment variables
-            # AWS_DEFAULT_REGION: sotred in CircleCI environment variables
-            # AWS_SECRET_ACCESS_KEY_1: stored in CircleCI environment variables
-            # AWSIAM_USER: stored in CircleCI environment variables
-            # AWSIAM_POCLIY_NAME: stored in CircleCI environment variables
-            MOLECULE_VERBOSITY: 0
-            PROFILE_TASKS_SORT_ORDER: 'none'
-            PROFILE_TASKS_TASK_OUTPUT_LIMIT: '200'
-            PY_COLORS: '1'
-            TZ: 'Asia/Tokyo'
+      - aws-cli/setup:
+          profile-name: default
+          role-arn: ${AWS_ROLE_ARN}
+          role-session-name: circleci_ansible-playbook_jenkins_install
+          session-duration: '1800'
       - run:
           name: Set timestamp for making sure Molecule would create unique AWS resources
           command: |
@@ -164,22 +145,6 @@ jobs:
             PY_COLORS: '1'
             # SECURITY_GROUP_NAME: sotred in CircleCI environment variables
             # VPC_SUBNET_ID: sotred in CircleCI environment variables
-            TZ: 'Asia/Tokyo'
-      - run:
-          name: Delete AWS Access Key
-          command: |
-            molecule cleanup --scenario-name awsiam
-          environment:
-            ANSIBLE_FORCE_COLOR: '1'
-            # AWS_ACCESS_KEY_ID_1: sotred in CircleCI environment variables
-            # AWS_DEFAULT_REGION: sotred in CircleCI environment variables
-            # AWS_SECRET_ACCESS_KEY_1: stored in CircleCI environment variables
-            # AWSIAM_USER: stored in CircleCI environment variables
-            # AWSIAM_POCLIY_NAME: stored in CircleCI environment variables
-            MOLECULE_VERBOSITY: 0
-            PROFILE_TASKS_SORT_ORDER: 'none'
-            PROFILE_TASKS_TASK_OUTPUT_LIMIT: '200'
-            PY_COLORS: '1'
             TZ: 'Asia/Tokyo'
       - run:
           name: Show Ansible version
@@ -237,13 +202,13 @@ workflows:
           molecule-ami-name: 'centos7'
           molecule-instance-type: 't2.medium'
           molecule-ec2-tag: 'molecule_jenkins_install_centos7'
-          context: aws-credentials
+          context: AWS_OPENID_CONNECT_TOKENS
           requires:
             - ansible-lint
       - molecule-ec2:
           molecule-ami-name: 'centos-stream8'
           molecule-instance-type: 't2.medium'
           molecule-ec2-tag: 'molecule_jenkins_install_centos_stream8'
-          context: aws-credentials
+          context: AWS_OPENID_CONNECT_TOKENS
           requires:
             - ansible-lint
