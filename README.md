@@ -1,6 +1,6 @@
-[![](https://github.com/ansible-playbooks-centos7/jenkins_install/workflows/build/badge.svg)](https://github.com/ansible-playbooks-centos7/jenkins_install/actions?query=workflow%3Abuild)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/ansible-playbooks-mamono210/jenkins_install/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ansible-playbooks-mamono210/jenkins_install/tree/main)
 
-This playbook installs Jenkins on CentOS7.
+This playbook installs Jenkins on CentOS Stream 8.
 
 # Install Jenkins
 
