@@ -194,15 +194,7 @@ workflows:
           matrix:
             parameters:
               molecule-image:
-                - 'ghcr.io/docker-hub-tm/ansible-test/centos7:latest'
                 - 'ghcr.io/docker-hub-tm/ansible-test/centos-stream8:latest'
-          requires:
-            - ansible-lint
-      - molecule-ec2:
-          molecule-ami-name: 'centos7'
-          molecule-instance-type: 't2.medium'
-          molecule-ec2-tag: 'molecule_jenkins_install_centos7'
-          context: AWS_OPENID_CONNECT_TOKENS
           requires:
             - ansible-lint
       - molecule-ec2:
