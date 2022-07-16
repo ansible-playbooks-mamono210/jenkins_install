@@ -66,9 +66,11 @@ jobs:
           command: |
             molecule test --scenario-name docker
           environment:
-            PY_COLORS: '1'
             ANSIBLE_FORCE_COLOR: '1'
+            ANSIBLE_TASK_TIMEOUT: '600'
             MOLECULE_IMAGE: << parameters.molecule-image >>
+            PY_COLORS: '1'
+          no_output_timeout: 15m
       - run:
           name: Show Ansible version
           command: |
@@ -132,6 +134,7 @@ jobs:
             molecule test --scenario-name vm
           environment:
             ANSIBLE_FORCE_COLOR: '1'
+            ANSIBLE_TASK_TIMEOUT: '600'
             # AMI_ID: sotred in system environment variables
             # AMI_NAME: stored in CircleCI environment variables
             # AWS_DEFAULT_REGION: sotred in CircleCI environment variables
@@ -146,6 +149,7 @@ jobs:
             # SECURITY_GROUP_NAME: sotred in CircleCI environment variables
             # VPC_SUBNET_ID: sotred in CircleCI environment variables
             TZ: 'Asia/Tokyo'
+          no_output_timeout: 15m
       - run:
           name: Show Ansible version
           command: |
