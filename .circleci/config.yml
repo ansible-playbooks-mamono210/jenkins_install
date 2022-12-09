@@ -120,14 +120,6 @@ jobs:
             echo "export AMI_NAME=<< parameters.molecule-ami-name >>-*" >> $BASH_ENV
             source $BASH_ENV
       - run:
-          name: Install required Ansible roles
-          command: |
-            ansible-galaxy install -r molecule/vm/requirements.yml
-      - run:
-          name: Create galaxy dependencies file in 'molecule/vm/'
-          command: |
-            cp roles/requirements.yml molecule/vm/requirements.yml
-      - run:
           name: Test with molecule
           command: |
             molecule test --scenario-name vm
