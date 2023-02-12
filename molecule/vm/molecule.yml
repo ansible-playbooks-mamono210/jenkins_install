@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
 driver:
-  name: ec2
+  name: delegated
 platforms:
   - name: ${PLATFORM_NAME}
     image_name: ${AMI_NAME}
