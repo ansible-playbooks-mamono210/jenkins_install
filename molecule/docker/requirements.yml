@@ -1,11 +1,11 @@
 ---
 roles:
-  - geerlingguy.pip
-  - geerlingguy.docker
-  - geerlingguy.git
-  - geerlingguy.java
-  - geerlingguy.jenkins
-  - robertdebock.bootstrap
+  - name: geerlingguy.pip
+  - name: geerlingguy.docker
+  - name: geerlingguy.git
+  - name: geerlingguy.java
+  - name: geerlingguy.jenkins
+  - name: robertdebock.bootstrap
   - name: mamono210.epel
     src: https://github.com/ansible-roles-mamono210/epel.git
-  - robertdebock.locale
+  - name: robertdebock.locale
