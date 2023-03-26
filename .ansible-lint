@@ -1,6 +1,2 @@
 ---
 parseable: true
-warn_list:
-  - experimental
-  - yaml
-  - name[casing]
