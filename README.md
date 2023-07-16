@@ -1,4 +1,4 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/ansible-playbooks-mamono210/jenkins_install/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ansible-playbooks-mamono210/jenkins_install/tree/main)
+# This repository is deprecated, no more changes shall be made to this repository.
 
 This playbook installs Jenkins on CentOS Stream 8.
 
